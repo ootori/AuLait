@@ -48,26 +48,5 @@ class CorrelationCoefficient
     {
         return array_sum($x) / count($x);
     }
-
 }
-
-
-/*
-$function = new CorrelationCoefficient();
-
-echo $function->execute([1, 0.5, 0], [1, 0.5, 0]) . PHP_EOL;
-echo $function->execute([1, 0.5, 0], [0, 0.5, 1]) . PHP_EOL;
-echo $function->execute([1, 0.5, 0], [1, 0.5, 1]) . PHP_EOL;
-
-echo "--------------------------------------------" . PHP_EOL;
-
-echo $function->execute([1, 0.5, 0], [0.6, 0.5, 0.4]) . PHP_EOL;
-
-echo $function->execute([1, 0.5, 0], [0.2, 0.1, 0.0]) . PHP_EOL;
-echo $function->execute([1, 0.5, 0], [0.3, 0.1, -0.1]) . PHP_EOL;
-
-echo $function->execute([0, 0], [0,0]) . PHP_EOL;
-
-*/
-
 
