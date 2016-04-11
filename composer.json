@@ -1,10 +1,11 @@
 {
     "name": "ootori/aulait",
     "description": "The AuLait framework",
-    "license": "MIT",
+    "license": "BSD-2-Clause",
     "autoload": {
         "psr-0": {
             "AuLait\\": "src/"
         }
     }
 }
+
