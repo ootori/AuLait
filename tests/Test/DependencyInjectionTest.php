@@ -8,7 +8,7 @@ use AuLait\Router;
 class DependencyInjectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * DIÇÃÉãÅ[ÉãÇÉZÉbÉgÇ≈Ç´ÇÈÇ©
+     * DI„ÅÆ„É´„Éº„É´„Çí„Çª„ÉÉ„Éà„Åß„Åç„Çã„Åã
      */
     public function testSet()
     {
@@ -24,7 +24,7 @@ class DependencyInjectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \AuLait\Exception\DependencyInjectionException
-     * @expectedExceptionCodeÅ@\AuLait\Exception\DateTimeException::CODE_INVALID_PARAMETER
+     * @expectedExceptionCode„ÄÄ\AuLait\Exception\DateTimeException::CODE_INVALID_PARAMETER
      */
     public function testSetFaild()
     {
@@ -51,7 +51,7 @@ class DependencyInjectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \AuLait\Exception\DependencyInjectionException
-     * @expectedExceptionCodeÅ@\AuLait\Exception\DateTimeException::CODE_NO_REGISTER_FACTORY
+     * @expectedExceptionCode„ÄÄ\AuLait\Exception\DateTimeException::CODE_NO_REGISTER_FACTORY
      */
     public function testFailed()
     {

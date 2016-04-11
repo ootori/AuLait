@@ -14,7 +14,7 @@ spl_autoload_register(function($class){
     }
 });
 
-// DispatcherTest—p‚ÌDummyControllerƒNƒ‰ƒX
+// DispatcherTestç”¨ã®DummyControllerã‚¯ãƒ©ã‚¹
 require_once('DummyController.php');
 
 

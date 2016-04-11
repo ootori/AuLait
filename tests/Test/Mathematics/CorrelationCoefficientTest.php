@@ -44,11 +44,11 @@ class CorrelationCoefficientTest extends \PHPUnit_Framework_TestCase
     static public function providerFailedPattern()
     {
         return [
-            [ // ƒxƒNƒgƒ‹‚Ì’·‚³ˆá‚¢
+            [ // ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•é•ã„
                 [1.0, 0.5, 0.0],
                 [1.0, 0.5]
             ],
-            [ // ‘S•”‚OB”Šw“I‚É‚O‚ª³‚µ‚¢‚Ì‚©EEE‚P‚ª³‚µ‚¢‚Ì‚©EEE
+            [ // å…¨éƒ¨ï¼ã€‚æ•°å­¦çš„ã«ï¼ãŒæ­£ã—ã„ã®ã‹ãƒ»ãƒ»ãƒ»ï¼‘ãŒæ­£ã—ã„ã®ã‹ãƒ»ãƒ»ãƒ»
                 [0.0, 0.0, 0.0],
                 [0.0, 0.0, 0.0]
             ]

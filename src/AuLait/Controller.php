@@ -18,7 +18,7 @@ class Controller
     public function after() {}
 
     /**
-     * リダイレクトする。
+     * 繝ｪ繝繧､繝ｬ繧ｯ繝医☆繧九�
      *
      * @param $url
      */

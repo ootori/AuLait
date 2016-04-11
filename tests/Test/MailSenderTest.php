@@ -23,8 +23,8 @@ Mail title
 Mail body
 Body;
 
-        // TODO: ‚¢‚Ü–{“–‚Éƒ[ƒ‹‘—‚Á‚Ä‚µ‚Ü‚¤‚Ì‚Å‘—‚ç‚È‚¢‚æ‚¤‚É‚·‚éiMockì‚é) or
-        // ‘—‚Á‚½‚à‚Ì‚ª‚¿‚á‚ñ‚Æƒ[ƒ‹ƒ{ƒbƒNƒX‚É“ü‚Á‚Ä‚é‚©Šm”F•íœ‚·‚éB
+        // TODO: ã„ã¾æœ¬å½“ã«ãƒ¡ãƒ¼ãƒ«é€ã£ã¦ã—ã¾ã†ã®ã§é€ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹ï¼ˆMockä½œã‚‹) or
+        // é€ã£ãŸã‚‚ã®ãŒã¡ã‚ƒã‚“ã¨ãƒ¡ãƒ¼ãƒ«ãƒœãƒƒã‚¯ã‚¹ã«å…¥ã£ã¦ã‚‹ã‹ç¢ºèªï¼†å‰Šé™¤ã™ã‚‹ã€‚
         $mailSender = new MailSender();
         $mailSender->send(
             getenv('TEST_MAIL_FROM'),
@@ -35,7 +35,7 @@ Body;
 
     /**
      * @expectedException \AuLait\Exception\MailSenderException
-     * @expectedExceptionCode@\AuLait\Exception\MailSenderException::CODE_FAILED_TO_SEND_MAIL
+     * @expectedExceptionCodeã€€\AuLait\Exception\MailSenderException::CODE_FAILED_TO_SEND_MAIL
      */
     public function testSendFailure()
     {
@@ -48,7 +48,7 @@ Mail title
 Mail body
 Body;
 
-        // ‘—‚èæ‚ðnull‚ÉB
+        // é€ã‚Šå…ˆã‚’nullã«ã€‚
         $mailSender = new MailSender();
         $mailSender->send(
             getenv('TEST_MAIL_FROM'),
