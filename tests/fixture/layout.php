@@ -1,0 +1,1 @@
+<html><head></head><body><?=htmlspecialchars($text, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></body></html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="bootstrap.php" backupGlobals="true" verbose="true">
+    <testsuites>
+        <testsuite name="AuLait">
+            <directory suffix="Test.php">Test</directory>
+            <directory suffix="Test.php">Test/*</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../src/AuLait</directory>
+            <directory suffix=".php">../src/AuLait/*</directory>
+            <directory suffix=".php">../src/AuLait/*/*</directory>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="TEST_MAIL_TO" value="" />
+        <env name="TEST_MAIL_FROM" value="" />
+    </php>
+
+</phpunit>

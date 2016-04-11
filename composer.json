@@ -1,0 +1,10 @@
+{
+    "name": "ootori/aulait",
+    "description": "The AuLait framework",
+    "license": "MIT",
+    "autoload": {
+        "psr-0": {
+            "AuLait\\": "src/"
+        }
+    }
+}
