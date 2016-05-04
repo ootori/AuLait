@@ -20,6 +20,16 @@ class ViewTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \AuLait\Exception\ViewException
+     * @expectedExceptionCode@\AuLait\Exception\ViewException::CODE_USE_RESERVED_WORD
+     */
+    public function testAssignWithReservedWord()
+    {
+        $view = new View();
+        $view->assign('this', 'Hello World!');
+    }
+
+    /**
      * @dataProvider providerDisplay
      */
     public function testDisplay($layout, $expected)

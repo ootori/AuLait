@@ -1,11 +1,14 @@
 <?php
 namespace AuLait;
 
+use AuLait\Exception\ViewException;
+
 class View
 {
     protected $path = '';
     protected $data = [];
     protected $layout = null;
+    protected $reservedWords = ['this', 'body'];
 
     /**
      * @param array $data
@@ -34,9 +37,16 @@ class View
     /**
      * @param string $key
      * @param mixed $value
+     * @throws ViewException
      */
     public function assign($key, $value)
     {
+        if (in_array($key, $this->reservedWords)) {
+            throw new ViewException(
+                "$key is a reserved word",
+                ViewException::CODE_USE_RESERVED_WORD
+            );
+        }
         $this->data[$key] = $value;
     }
 
