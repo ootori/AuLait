@@ -44,6 +44,15 @@ class Router
         $matching = false;
         foreach ($this->patterns as $name => $setting) {
             $options = $setting['options'];
+
+            // 完全一致
+            if (isset($options['equal']) && $options['equal'] && $setting['pattern'] === $path) {
+                $matching = true;
+                $this->controller = $options['controller'];
+                $this->params = [];
+                break;
+            }
+
             $re = preg_replace_callback(
                 '#({(\w+)})#',
                 function ($matches) use($options) {

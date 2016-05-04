@@ -21,6 +21,17 @@ class RouterTest extends \PHPUnit_Framework_TestCase
                 ]
             ],
             [
+                'equal',
+                '/equal',
+                [
+                    'controller' => 'Equal',
+                    'equal' => true,
+                ],
+                '/equal',
+                'Equal',
+                []
+            ],
+            [
                 'article_detail',
                 '/article/{id}',
                 [
