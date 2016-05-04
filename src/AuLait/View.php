@@ -9,6 +9,7 @@ class View
     protected $data = [];
     protected $layout = null;
     protected $reservedWords = ['this', 'body'];
+    public $helper = null;
 
     /**
      * @param array $data
@@ -32,6 +33,14 @@ class View
     public function setLayout($file)
     {
         $this->layout = $file;
+    }
+
+    /**
+     * @param  object $helper
+     */
+    public function setHelper($helper)
+    {
+        $this->helper = $helper;
     }
 
     /**

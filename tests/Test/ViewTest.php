@@ -1,7 +1,9 @@
 <?php
 namespace AuLait\Test;
 
+use AuLait\DependencyInjection;
 use AuLait\View;
+use AuLait\View\Helper;
 
 class ViewTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,9 +21,28 @@ class ViewTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    public function testHelper()
+    {
+        $expected = 'test';
+
+        $di = new DependencyInjection();
+        $helper = new Helper($di);
+        $helper->addMethod(
+            'test',
+            function(){
+                return 'test';
+            }
+        );
+        $view = new View();
+        $view->setHelper($helper);
+
+        $result = $view->helper->test();
+        $this->assertEquals($expected, $result);
+    }
+
     /**
      * @expectedException \AuLait\Exception\ViewException
-     * @expectedExceptionCodeÅ@\AuLait\Exception\ViewException::CODE_USE_RESERVED_WORD
+     * @expectedExceptionCode„ÄÄ\AuLait\Exception\ViewException::CODE_USE_RESERVED_WORD
      */
     public function testAssignWithReservedWord()
     {
