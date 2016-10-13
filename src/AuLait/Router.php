@@ -24,26 +24,32 @@ class Router
         ];
     }
 
+    /**
+     * @param string $default_scheme
+     */
     public function setDefaultScheme($default_scheme)
     {
         $this->default_scheme = $default_scheme;
     }
 
+    /**
+     * @param string $server_name
+     */
     public function setDefaultServerName($server_name)
     {
         $this->default_server_name = $server_name;
     }
 
     /**
-     * @param $path
+     * @param string $path
      * @return bool
      */
     public function handle($path)
     {
-        // TODO: 完全一致で問題ない場合は正規表現使わない方が高速なのでそういう処理も入れたい。
         // TODO: urlの前方一致（もしくはグルーピング）機能がほしい
         $matching = false;
         foreach ($this->patterns as $name => $setting) {
+
             $options = $setting['options'];
 
             // 完全一致
@@ -54,6 +60,7 @@ class Router
                 break;
             }
 
+            // 正規表現での一致 (ex: /article/{id})
             $re = preg_replace_callback(
                 '#({(\w+)})#',
                 function ($matches) use($options) {
@@ -73,21 +80,36 @@ class Router
         return $matching;
     }
 
+    /**
+     * @return string
+     */
     public function getControllerName()
     {
         return $this->controller;
     }
+
+    /**
+     * @return string
+     */
     public function getActionName()
     {
         // TODO: 許可アクションの種別をホワイトリストチェック
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
+    /**
+     * @return array
+     */
     public function getParams()
     {
         return $this->params;
     }
 
+    /**
+     * @param string $name
+     * @param array $parameters
+     * @return string
+     */
     public function generate($name, $parameters = [])
     {
         $pattern = $this->patterns[$name];
