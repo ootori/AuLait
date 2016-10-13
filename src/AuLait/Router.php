@@ -4,9 +4,10 @@ class Router
 {
     protected $patterns = [];
 
-    protected $controller = null;
-    protected $action = null;
-    protected $params = null;
+    protected $controller = '';
+    protected $action = '';
+    protected $params = [];
+
     protected $default_scheme = 'https';
     protected $default_server_name = '127.0.0.1';
 
