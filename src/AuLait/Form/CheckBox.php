@@ -4,6 +4,7 @@ namespace AuLait\Form;
 class CheckBox extends Element
 {
     protected $form_type = 'checkbox';
+    protected $form_value = '1';
 
     public function render($params = [])
     {
@@ -23,7 +24,7 @@ class CheckBox extends Element
             '<input type="%s" name="%s" value="%s"%s/>',
             $security->sanitize($this->form_type),
             $security->sanitize($this->name),
-            $security->sanitize($this->value),
+            $security->sanitize($this->form_value),
             $attr
         );
     }

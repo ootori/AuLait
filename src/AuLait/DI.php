@@ -7,14 +7,14 @@ class DI
     /**
      * @param DependencyInjection $di
      */
-    static function setDefault(DependencyInjection $di) {
+    static public function setDefault(DependencyInjection $di) {
         self::$container['_default'] = $di;
     }
 
     /**
      * @return DependencyInjection
      */
-    static function getDefault() {
+    static public function getDefault() {
         return self::$container['_default'];
     }
 

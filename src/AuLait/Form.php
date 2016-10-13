@@ -88,6 +88,9 @@ class Form
 
     public function getValue($name)
     {
+        if (!isset($this->elements[$name])) {
+            return null;
+        }
         return $this->elements[$name]->getValue();
     }
 
@@ -100,7 +103,7 @@ class Form
      * 値の有無をチェックする。
      *
      * 例：<input type="submit" name="back" value="true"><input type="submit" name="forward" value="true">
-     * 見たいな状態で、どちらのボタンが押されたかを判定するのに使用する。
+     * のような状態で、どちらのボタンが押されたかを判定するのに使用する。
      *
      * @param $name
      * @return bool
