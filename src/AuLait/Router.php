@@ -1,5 +1,7 @@
 <?php
 namespace AuLait;
+use AuLait\Exception\RouterException;
+
 class Router
 {
     protected $patterns = [];
@@ -112,7 +114,12 @@ class Router
      */
     public function generate($name, $parameters = [])
     {
-        $pattern = $this->patterns[$name];
+        if (isset($this->patterns[$name])) {
+            $pattern = $this->patterns[$name];
+        } else {
+            throw new RouterException("undefined routing '$name' ");
+        }
+
         $re = preg_replace_callback(
             '#({(\w+)})#',
             function ($matches) use(&$parameters) {

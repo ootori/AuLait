@@ -68,9 +68,11 @@ class Dispatcher
             }
         }
 
-        $controller->before();
+        $result = $controller->before();
 
-        return $reflectionMethod->invokeArgs($controller, $pass);
+        if ($result) {
+            $reflectionMethod->invokeArgs($controller, $pass);
+        }
 
         $controller->after();
 

@@ -2,7 +2,7 @@
 namespace AuLait;
 class DI
 {
-    static protected $container = array();
+    static protected $container = [];
 
     /**
      * @param DependencyInjection $di

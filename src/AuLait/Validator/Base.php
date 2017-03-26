@@ -9,7 +9,7 @@ abstract class Base
      */
     public function __construct($options=[])
     {
-        $this->options = $options;
+        $this->options = array_merge($this->options, $options);
     }
 
     /**

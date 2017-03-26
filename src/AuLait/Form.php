@@ -1,10 +1,19 @@
 <?php
 namespace AuLait;
 
+use AuLait\Form\Element;
+use AuLait\Form\File;
+
 class Form
 {
     /** @var DependencyInjection */
     protected $di = null;
+
+    /** @var string post|get */
+    protected $method = 'post';
+
+    /** @var Request  */
+    protected $request = null;
 
     /** @var Form\Element[] フォーム内のinput要素 */
     protected $elements = [];
@@ -12,12 +21,33 @@ class Form
     /** @var array エラー文言 */
     protected $errors = [];
 
+    /**
+     * Form constructor.
+     * @param DependencyInjection $di
+     */
     public function __construct(DependencyInjection $di)
     {
         $this->di = $di;
     }
 
-    public function add($element)
+    /**
+     * @param array $defaults
+     */
+    public function setDefaults($defaults = [])
+    {
+        foreach ($defaults as $key => $value) {
+            if (isset($this->elements[$key])) {
+                $this->elements[$key]->setValue($value);
+            }
+        }
+    }
+
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+    }
+
+    public function add(Element $element)
     {
         $element->setDI($this->di);
         $this->elements[$element->name] = $element;
@@ -28,6 +58,7 @@ class Form
         return $this->elements[$name];
     }
 
+
     /**
      * @return bool
      */
@@ -35,16 +66,29 @@ class Form
     {
         $this->errors = [];
 
-        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            // TODO: csrfはFormに持たないようにしてForm\CSRFのようなinput要素をつくってそっちで対応する
-            if (!$this->di->share('security')->checkCsrfToken($_POST['csrf'])) {
-                $this->addError('csrf', '無効なフォームからの送信です。');
-                return false;
-            }
+//        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
+//            // TODO: csrfはFormに持たないようにしてForm\CSRFのようなinput要素をつくってそっちで対応する
+//            if (!isset($_POST['csrf']) || !$this->di->share('security')->checkCsrfToken($_POST['csrf'])) {
+//                $this->addError('csrf', '無効なフォームからの送信です。');
+//                return false;
+//            }
+//        }
+
+        if ($this->method == 'post') {
+            $inputs = $this->request->getRequests();
+        } else {
+            $inputs = $this->request->getQueries();
         }
 
         foreach ($this->elements as $element) {
-            if (!$element->validate()) {
+
+            if ($element instanceof File) {
+                $value = $this->request->getFile($element->name);
+            } else {
+                $value = $inputs[$element->name];
+            }
+
+            if (!$element->validate($value)) {
                 $this->errors[$element->name] = $element->getErrors();
             }
         }
@@ -86,18 +130,19 @@ class Form
         $this->elements[$name]->render($params);
     }
 
-    public function getValue($name)
+    public function getValue($name, $default = null)
     {
         if (!isset($this->elements[$name])) {
-            return null;
+            return $default;
         }
-        return $this->elements[$name]->getValue();
+        $value = $this->elements[$name]->getValue();
+        return  ($value == '') ? $default : $value;
     }
 
-    public function getCsrfToken()
-    {
-        return $this->di->share('security')->getCsrfToken();
-    }
+//    public function getCsrfToken()
+//    {
+//        return $this->di->share('security')->getCsrfToken();
+//    }
 
     /**
      * 値の有無をチェックする。

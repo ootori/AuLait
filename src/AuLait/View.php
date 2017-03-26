@@ -50,13 +50,33 @@ class View
      */
     public function assign($key, $value)
     {
+        $this->checkReservedWord($key);
+        $this->data[$key] = $value;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @throws ViewException
+     */
+    public function append($key, $value)
+    {
+        $this->checkReservedWord($key);
+        $this->data[$key][] = $value;
+    }
+
+    /**
+     * @param $key
+     * @throws ViewException
+     */
+    protected function checkReservedWord($key)
+    {
         if (in_array($key, $this->reservedWords)) {
             throw new ViewException(
                 "$key is a reserved word",
                 ViewException::CODE_USE_RESERVED_WORD
             );
         }
-        $this->data[$key] = $value;
     }
 
     /**
@@ -86,4 +106,16 @@ class View
         echo $this->render($file);
     }
 
+
+    /**
+     * @param $key
+     * @return DependencyInjection|mixed
+     */
+    public function __get($key)
+    {
+        if ($key == 'di') {
+            return DI::getDefault();
+        }
+        return DI::getDefault()->share($key);
+    }
 }
