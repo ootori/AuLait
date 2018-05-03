@@ -74,7 +74,7 @@ class Image
         $width = $this->getWidth();
         $height = $this->getHeight();
 
-        if ($ignoreAspectRatio === false) {
+        if ($ignoreAspectRatio === true) {
             $resizeX = $maxX;
             $resizeY = $maxY;
         } elseif ($width < $height) {

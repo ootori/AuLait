@@ -1,23 +1,26 @@
 <?php
 namespace AuLait;
+
 class Loader
 {
-    protected $modules = [];
+    protected $systemRoot = "";
+    protected $appDir = "";
 
-    public function addModule($module)
+    public function __construct($systemRoot, $appDir = "app")
     {
-        $this->modules[] = $module;
+        $this->systemRoot = $systemRoot;
+        $this->appDir = $appDir;
     }
 
     public function register()
     {
-        spl_autoload_register('self::load', true, true);
+        spl_autoload_register([$this, 'load'], true, true);
     }
 
-    static public function load($class)
+    public function load($class)
     {
         $class = str_replace('\\', '/', $class);
-        $path = SYSTEM_ROOT . '/app/' . $class . '.php';
+        $path = $this->systemRoot . DIRECTORY_SEPARATOR . $this->appDir . DIRECTORY_SEPARATOR . $class . '.php';
         if (file_exists($path)) {
             require_once($path);
             return;

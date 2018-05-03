@@ -7,9 +7,10 @@ class Router
     protected $patterns = [];
 
     protected $controller = '';
-    protected $action = '';
+//    protected $action = '';
     protected $params = [];
 
+    protected $default_route = True;
     protected $default_scheme = 'https';
     protected $default_server_name = '127.0.0.1';
 
@@ -48,6 +49,9 @@ class Router
      */
     public function handle($path)
     {
+        $this->controller = '';
+//        $this->action = '';
+
         // TODO: urlの前方一致（もしくはグルーピング）機能がほしい
         $matching = false;
         foreach ($this->patterns as $name => $setting) {
@@ -78,6 +82,14 @@ class Router
                 $this->params = $matches;
                 break;
             }
+        }
+
+        // 一致してない場合にデフォルトルートを利用
+        if ($this->controller === "" && $this->default_route) {
+            $matching = true;
+            // TODO: 「\\Controller」を除去する
+            $this->controller = "\\Controllers". implode("\\", array_map("ucfirst", explode('/', $path)));
+            $this->params = $matches;
         }
         return $matching;
     }
@@ -111,11 +123,20 @@ class Router
      * @param string $name
      * @param array $parameters
      * @return string
+     * @throws RouterException
      */
     public function generate($name, $parameters = [])
     {
         if (isset($this->patterns[$name])) {
             $pattern = $this->patterns[$name];
+        } else if ($this->default_route) {
+            // 一致してない場合にデフォルトルートを利用
+            // ex: $name = user_login => /user/login
+            $path = '/'. str_replace('_', '/', $name);
+            $pattern = [
+                'pattern' => $path,
+                'option' => []
+            ];
         } else {
             throw new RouterException("undefined routing '$name' ");
         }
@@ -139,6 +160,7 @@ class Router
             $query = '';
         }
 
-        return $this->default_scheme. '://'. $this->default_server_name. $re. $query;
+//        return $this->default_scheme. '://'. $this->default_server_name. $re. $query;
+        return $re. $query;
     }
 }

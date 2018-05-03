@@ -74,21 +74,21 @@ class Form
 //            }
 //        }
 
-        if ($this->method == 'post') {
-            $inputs = $this->request->getRequests();
-        } else {
-            $inputs = $this->request->getQueries();
-        }
+//        if ($this->method == 'post') {
+//            $inputs = $this->request->getRequests();
+//        } else {
+//            $inputs = $this->request->getQueries();
+//        }
 
         foreach ($this->elements as $element) {
+//
+//            if ($element instanceof File) {
+//                $value = $this->request->getFile($element->name);
+//            } else {
+//                $value = $inputs[$element->name];
+//            }
 
-            if ($element instanceof File) {
-                $value = $this->request->getFile($element->name);
-            } else {
-                $value = $inputs[$element->name];
-            }
-
-            if (!$element->validate($value)) {
+            if (!$element->validate()) {
                 $this->errors[$element->name] = $element->getErrors();
             }
         }
@@ -139,10 +139,10 @@ class Form
         return  ($value == '') ? $default : $value;
     }
 
-//    public function getCsrfToken()
-//    {
-//        return $this->di->share('security')->getCsrfToken();
-//    }
+    public function getCsrfToken()
+    {
+        return $this->di->share('security')->getCsrfToken();
+    }
 
     /**
      * 値の有無をチェックする。

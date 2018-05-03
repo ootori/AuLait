@@ -55,11 +55,13 @@ class Element
     /**
      * @return bool
      */
-    public function validate($value)
+    public function validate()
     {
         $this->errors = [];
 
-        $this->setValue($value);
+//        $this->setValue($value);
+
+        $value = $this->getValue();
 
         /** @var \AuLait\Validator\Base $validator */
         foreach ($this->validators as $validator) {
