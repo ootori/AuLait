@@ -53,7 +53,7 @@ class Dispatcher
         $args = $this->params;
 
         if (!class_exists($className)) {
-            throw new DispatcherException('Class not found', DispatcherException::CODE_CLASS_NOT_FOUND);
+            throw new DispatcherException("Class not found $className", DispatcherException::CODE_CLASS_NOT_FOUND);
         }
         $controller = new $className();
 
@@ -68,9 +68,11 @@ class Dispatcher
             }
         }
 
-        $controller->before();
+        $result = $controller->before();
 
-        return $reflectionMethod->invokeArgs($controller, $pass);
+        if ($result) {
+            $reflectionMethod->invokeArgs($controller, $pass);
+        }
 
         $controller->after();
 

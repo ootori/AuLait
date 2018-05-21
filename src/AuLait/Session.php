@@ -8,12 +8,14 @@ use AuLait\Exception\SessionException;
  */
 class Session
 {
+    protected $flush = null;
+
     /**
      * @throws SessionException
      */
     public function __construct()
     {
-        if (!session_start()) {
+        if (!\session_start()) {
             throw new SessionException('Failed to start session');
         }
     }
@@ -68,4 +70,33 @@ class Session
     // TODO: 読んだらすぐにクローズする。(read_and_closeの設定)
     // TODO: $_SESSIONに突っ込まずにflash()で書き込みにする。
     // TODO: 最終アクセスから一定時間たっていたらセッションID振りなおしたほうがいいかもしれない。
+
+    // TODO: destroy
+
+
+    /**
+     * @param $message
+     */
+    public function setFlash($message)
+    {
+        $_SESSION['_flush'] = $message;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFlash()
+    {
+        return isset($_SESSION['_flush']);
+    }
+
+    /**
+     * @return null
+     */
+    public function flash()
+    {
+        $message = $_SESSION['_flush'];
+        $_SESSION['_flush'] = null;
+        return $message;
+    }
 }

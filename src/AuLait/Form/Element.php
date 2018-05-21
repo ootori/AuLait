@@ -59,9 +59,13 @@ class Element
     {
         $this->errors = [];
 
+//        $this->setValue($value);
+
+        $value = $this->getValue();
+
         /** @var \AuLait\Validator\Base $validator */
         foreach ($this->validators as $validator) {
-            $messages = $validator->validate($this->value);
+            $messages = $validator->validate($value);
             if ($messages) {
                 $this->errors = array_merge($this->errors, $messages);
             }

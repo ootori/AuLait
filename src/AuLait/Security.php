@@ -40,6 +40,8 @@ class Security
     }
 
     /**
+     * ランダムな文字列を返す。$binaryがfalseの場合は62進数の文字列で返す。
+     *
      * @param int $length
      * @param bool|true $binary
      * @return string

@@ -22,9 +22,7 @@ class DependencyInjection
             );
         }
 
-        $this->container[$key] = call_user_func($this->factory[$key]);
-
-        return $this->container[$key];
+        return call_user_func($this->factory[$key]);
     }
 
     /**

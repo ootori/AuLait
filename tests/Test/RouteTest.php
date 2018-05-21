@@ -21,6 +21,17 @@ class RouterTest extends \PHPUnit_Framework_TestCase
                 ]
             ],
             [
+                'equal',
+                '/equal',
+                [
+                    'controller' => 'Equal',
+                    'equal' => true,
+                ],
+                '/equal',
+                'Equal',
+                []
+            ],
+            [
                 'article_detail',
                 '/article/{id}',
                 [
@@ -78,7 +89,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
                     'controller' => 'Index'
                 ],
                 [],
-                'https://localhost/'
+                '/'
             ],
             [
                 'article_detail',
@@ -90,7 +101,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
                     'action' => 'edit',
                     'id' => 1000
                 ],
-                'https://localhost/article/1000?action=edit'
+                '/article/1000?action=edit'
             ],
         ];
     }
@@ -106,8 +117,6 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testGenerate($name, $path, $option, $parameter, $expected)
     {
         $router = new Router();
-        $router->setDefaultScheme('https');
-        $router->setDefaultServerName('localhost');
         $router->add(
             $name,
             $path,
