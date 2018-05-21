@@ -40,19 +40,19 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'fixture/horizontal.jpg',
-                false,
+                true,
                 50,
                 50,
             ],
             [
                 'fixture/horizontal.jpg',
-                true,
+                false,
                 50,
                 25,
             ],
             [
                 'fixture/vertical.jpg',
-                true,
+                false,
                 25,
                 50,
             ]
@@ -122,7 +122,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $resizeY = 50;
 
         $image = new Image('fixture/horizontal.jpg');
-        $resize = $image->resize($resizeX, $resizeY);
+        $resize = $image->resize($resizeX, $resizeY, true);
         $binary = $image->getBinary();
 
         $binaryGD = imagecreatefromstring($binary);

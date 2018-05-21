@@ -66,13 +66,13 @@ class Form
     {
         $this->errors = [];
 
-//        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-//            // TODO: csrfはFormに持たないようにしてForm\CSRFのようなinput要素をつくってそっちで対応する
-//            if (!isset($_POST['csrf']) || !$this->di->share('security')->checkCsrfToken($_POST['csrf'])) {
-//                $this->addError('csrf', '無効なフォームからの送信です。');
-//                return false;
-//            }
-//        }
+        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
+            // TODO: csrfはFormに持たないようにしてForm\CSRFのようなinput要素をつくってそっちで対応する
+            if (!isset($_POST['csrf']) || !$this->di->share('security')->checkCsrfToken($_POST['csrf'])) {
+                $this->addError('csrf', '無効なフォームからの送信です。');
+                return false;
+            }
+        }
 
 //        if ($this->method == 'post') {
 //            $inputs = $this->request->getRequests();

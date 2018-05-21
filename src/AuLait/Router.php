@@ -1,5 +1,6 @@
 <?php
 namespace AuLait;
+
 use AuLait\Exception\RouterException;
 
 class Router
@@ -7,12 +8,9 @@ class Router
     protected $patterns = [];
 
     protected $controller = '';
-//    protected $action = '';
     protected $params = [];
 
-    protected $default_route = True;
-    protected $default_scheme = 'https';
-    protected $default_server_name = '127.0.0.1';
+    protected $default_route = true;
 
     /**
      * @param string $name
@@ -21,26 +19,10 @@ class Router
      */
     public function add($name, $pattern, $options = [])
     {
-        $this->patterns[$name] =[
+        $this->patterns[$name] = [
             'pattern' => $pattern,
             'options' => $options
         ];
-    }
-
-    /**
-     * @param string $default_scheme
-     */
-    public function setDefaultScheme($default_scheme)
-    {
-        $this->default_scheme = $default_scheme;
-    }
-
-    /**
-     * @param string $server_name
-     */
-    public function setDefaultServerName($server_name)
-    {
-        $this->default_server_name = $server_name;
     }
 
     /**
@@ -50,7 +32,6 @@ class Router
     public function handle($path)
     {
         $this->controller = '';
-//        $this->action = '';
 
         // TODO: urlの前方一致（もしくはグルーピング）機能がほしい
         $matching = false;
@@ -69,14 +50,14 @@ class Router
             // 正規表現での一致 (ex: /article/{id})
             $re = preg_replace_callback(
                 '#({(\w+)})#',
-                function ($matches) use($options) {
-                    return  '(?<' .$matches[2] .'>[^/]+)';
+                function ($matches) use ($options) {
+                    return '(?<' . $matches[2] . '>[^/]+)';
                 },
                 $setting['pattern']
             );
 
-            $re = '#\A'.$re.'\z#';
-            if(preg_match($re, $path, $matches)){
+            $re = '#\A' . $re . '\z#';
+            if (preg_match($re, $path, $matches)) {
                 $matching = true;
                 $this->controller = $options['controller'];
                 $this->params = $matches;
@@ -88,7 +69,7 @@ class Router
         if ($this->controller === "" && $this->default_route) {
             $matching = true;
             // TODO: 「\\Controller」を除去する
-            $this->controller = "\\Controllers". implode("\\", array_map("ucfirst", explode('/', $path)));
+            $this->controller = "\\Controllers" . implode("\\", array_map("ucfirst", explode('/', $path)));
             $this->params = $matches;
         }
         return $matching;
@@ -129,38 +110,40 @@ class Router
     {
         if (isset($this->patterns[$name])) {
             $pattern = $this->patterns[$name];
-        } else if ($this->default_route) {
-            // 一致してない場合にデフォルトルートを利用
-            // ex: $name = user_login => /user/login
-            $path = '/'. str_replace('_', '/', $name);
-            $pattern = [
-                'pattern' => $path,
-                'option' => []
-            ];
         } else {
-            throw new RouterException("undefined routing '$name' ");
+            if ($this->default_route) {
+                // 一致してない場合にデフォルトルートを利用
+                // ex: $name = user_login => /user/login
+                $path = '/' . str_replace('_', '/', $name);
+                $pattern = [
+                    'pattern' => $path,
+                    'option' => []
+                ];
+            } else {
+                throw new RouterException("undefined routing '$name' ");
+            }
         }
 
         $re = preg_replace_callback(
             '#({(\w+)})#',
-            function ($matches) use(&$parameters) {
+            function ($matches) use (&$parameters) {
                 $value = '';
                 if (isset($parameters[$matches[2]])) {
                     $value = $parameters[$matches[2]];
                     unset($parameters[$matches[2]]);
                 }
-                return  $value;
+                return $value;
             },
             $pattern['pattern']
         );
 
         if ($parameters) {
-            $query = '?'.http_build_query($parameters);
+            $query = '?' . http_build_query($parameters);
         } else {
             $query = '';
         }
 
 //        return $this->default_scheme. '://'. $this->default_server_name. $re. $query;
-        return $re. $query;
+        return $re . $query;
     }
 }

@@ -48,12 +48,12 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                'https://127.0.0.1/',
+                '/',
                 [],
                 true
             ],
             [
-                'https://127.0.0.1/?param1=abc&amp;param2=xyz',
+                '/?param1=abc&amp;param2=xyz',
                 [
                     'param1' => 'abc',
                     'param2' => 'xyz'
@@ -61,7 +61,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
                 true
             ],
             [
-                'https://127.0.0.1/?param1=abc&param2=xyz',
+                '/?param1=abc&param2=xyz',
                 [
                     'param1' => 'abc',
                     'param2' => 'xyz'
