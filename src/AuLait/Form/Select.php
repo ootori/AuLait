@@ -1,11 +1,32 @@
 <?php
 namespace AuLait\Form;
 
+use AuLait\Validator\Choices;
+
 class Select extends Element
 {
     protected $form_type = 'select';
     protected $form_value = '1';
 
+    /**
+     * @param string $name
+     * @param array $params
+     */
+    public function __construct($name, $params = [])
+    {
+        parent::__construct($name, $params);
+
+        $choices = array_keys($this->params['options']);
+
+        $validator = new Choices([
+            'choices' => $choices,
+        ]);
+        $this->addValidator($validator);
+    }
+
+    /**
+     * @param array $params
+     */
     public function render($params = [])
     {
         $security = $this->di->share('security');
@@ -22,9 +43,14 @@ class Select extends Element
         );
 
         $input_value = $this->getValue();
+
+        if ($this->params['blank']) {
+            printf('<option value=""></option>');
+        }
+
         foreach ($this->params['options'] as $value => $label) {
-            $selected = ($input_value==$value) ? ' selected' : '';
-            printf (
+            $selected = ($input_value == $value) ? ' selected' : '';
+            printf(
                 '<option value="%s"%s>%s</option>',
                 $security->sanitize($value),
                 $selected,
