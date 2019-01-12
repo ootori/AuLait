@@ -64,6 +64,16 @@ class Image
     }
 
     /**
+     * get images pixel at coordinate
+     * @param $x integer
+     * @param $y integer
+     */
+    public function getPixel($x, $y)
+    {
+        return imagecolorat($this->gd, $x, $y);
+    }
+
+    /**
      * @param int $maxX
      * @param int $maxY
      * @param bool $ignoreAspectRatio 画像の縦横比を維持するか。
