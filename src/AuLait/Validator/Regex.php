@@ -1,7 +1,9 @@
 <?php
 namespace AuLait\Validator;
 
-class Csrf extends Base
+use AuLait\Exception;
+
+class Regex extends Base
 {
     protected $options = [
         'regex' => null,
@@ -16,8 +18,8 @@ class Csrf extends Base
      */
     public function validate($value)
     {
-        if (!isset($this->options['value'])) {
-            throw new \Exception('正規表現がセットされていません。');
+        if (!isset($this->options['regex'])) {
+            throw new Exception('Not found regex');
         }
 
         $messages = [];
@@ -25,7 +27,6 @@ class Csrf extends Base
         if ($value == '' && !$this->options['required']) {
             return [];
         }
-
         if (!preg_match($this->options['regex'], $value)) {
             $messages[] = $this->options['message'];
         }
