@@ -117,6 +117,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testGenerate($name, $path, $option, $parameter, $expected)
     {
         $router = new Router();
+//        $router->setDefaultScheme('https');
+//        $router->setDefaultServerName('localhost');
         $router->add(
             $name,
             $path,
