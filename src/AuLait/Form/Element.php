@@ -59,8 +59,6 @@ class Element
     {
         $this->errors = [];
 
-//        $this->setValue($value);
-
         $value = $this->getValue();
 
         /** @var \AuLait\Validator\Base $validator */
