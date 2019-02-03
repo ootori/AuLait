@@ -5,7 +5,7 @@ use AuLait\Exception\DependencyInjectionException;
 use AuLait\DependencyInjection;
 use AuLait\Router;
 
-class DependencyInjectionTest extends \PHPUnit_Framework_TestCase
+class DependencyInjectionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * DIのルールをセットできるか

@@ -3,7 +3,7 @@ namespace AuLait\Test;
 
 use AuLait\Router;
 
-class RouterTest extends \PHPUnit_Framework_TestCase
+class RouterTest extends \PHPUnit\Framework\TestCase
 {
     static public function providerHandle()
     {

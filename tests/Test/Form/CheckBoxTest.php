@@ -5,7 +5,7 @@ use AuLait\DependencyInjection;
 use AuLait\Form\CheckBox;
 use AuLait\Security;
 
-class CheckBoxTest extends \PHPUnit_Framework_TestCase
+class CheckBoxTest extends \PHPUnit\Framework\TestCase
 {
     static public function providerRender()
     {

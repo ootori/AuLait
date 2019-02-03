@@ -3,7 +3,7 @@ namespace AuLait\Test;
 use AuLait\DateTime;
 use AuLait\Exception\DateTimeException;
 
-class DateTimeTest extends \PHPUnit_Framework_TestCase
+class DateTimeTest extends \PHPUnit\Framework\TestCase
 {
 
     /**

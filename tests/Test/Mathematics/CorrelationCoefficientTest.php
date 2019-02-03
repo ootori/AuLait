@@ -3,7 +3,7 @@ namespace AuLait\Test\Mathematics;
 
 use AuLait\Mathematics\CorrelationCoefficient;
 
-class CorrelationCoefficientTest extends \PHPUnit_Framework_TestCase
+class CorrelationCoefficientTest extends \PHPUnit\Framework\TestCase
 {
     static public function providerSuccessPattern()
     {

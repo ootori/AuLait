@@ -3,7 +3,7 @@ namespace AuLait\Test;
 use AuLait\MailSender;
 use Guzzle\Tests\Service\Command\LocationVisitor\Response\BodyVisitorTest;
 
-class MailSenderTest extends \PHPUnit_Framework_TestCase
+class MailSenderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

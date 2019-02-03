@@ -4,7 +4,7 @@ namespace AuLait\Test;
 use AuLait\DI;
 use AuLait\DependencyInjection;
 
-class DITest extends \PHPUnit_Framework_TestCase
+class DITest extends \PHPUnit\Framework\TestCase
 {
     public function testDI()
     {

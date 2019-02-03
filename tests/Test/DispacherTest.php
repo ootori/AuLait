@@ -3,7 +3,7 @@ namespace AuLait\Test;
 
 use AuLait\Dispatcher;
 
-class DispatcherTest extends \PHPUnit_Framework_TestCase
+class DispatcherTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testDispatcher()

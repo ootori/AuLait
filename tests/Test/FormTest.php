@@ -12,9 +12,9 @@ use AuLait\Validator\Required;
 /**
  * @runTestsInSeparateProcesses
  */
-class FormTest extends \PHPUnit_Framework_TestCase
+class FormTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $di = new DependencyInjection();
         $di->set(

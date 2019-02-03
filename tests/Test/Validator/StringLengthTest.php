@@ -3,7 +3,7 @@ namespace AuLait\Test\Form;
 
 use AuLait\Validator\StringLength;
 
-class StringLengthTest extends \PHPUnit_Framework_TestCase
+class StringLengthTest extends \PHPUnit\Framework\TestCase
 {
     static public function providerValidator()
     {

@@ -3,7 +3,7 @@ namespace AuLait\Test\Form;
 
 use AuLait\Validator\Required;
 
-class RequiredTest extends \PHPUnit_Framework_TestCase
+class RequiredTest extends \PHPUnit\Framework\TestCase
 {
     static public function providerValidator()
     {

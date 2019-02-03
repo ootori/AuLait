@@ -9,9 +9,9 @@ use AuLait\DependencyInjection;
 /**
  * @runTestsInSeparateProcesses
  */
-class SecurityTest extends \PHPUnit_Framework_TestCase
+class SecurityTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $di = new DependencyInjection();
         $di->set(

@@ -1,11 +1,12 @@
 <?php
+
 namespace AuLait\Test;
 
 use AuLait\Controller;
 
-class ControllerTest extends \PHPUnit_Framework_TestCase
+class ControllerTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('xdebug')) {
             $this->markTestSkipped('xdebug module is not installed.');

@@ -5,7 +5,7 @@ use AuLait\DependencyInjection;
 use AuLait\View;
 use AuLait\View\Helper;
 
-class ViewTest extends \PHPUnit_Framework_TestCase
+class ViewTest extends \PHPUnit\Framework\TestCase
 {
     static public function providerDisplay()
     {

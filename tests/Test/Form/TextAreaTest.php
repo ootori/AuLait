@@ -5,7 +5,7 @@ use AuLait\DependencyInjection;
 use AuLait\Form\TextArea;
 use AuLait\Security;
 
-class TextAreaTest extends \PHPUnit_Framework_TestCase
+class TextAreaTest extends \PHPUnit\Framework\TestCase
 {
     static public function providerRender()
     {

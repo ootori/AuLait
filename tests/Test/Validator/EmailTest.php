@@ -3,7 +3,7 @@ namespace AuLait\Test\Form;
 
 use AuLait\Validator\Email;
 
-class EmailTest extends \PHPUnit_Framework_TestCase
+class EmailTest extends \PHPUnit\Framework\TestCase
 {
 
     static public function providerValidator()

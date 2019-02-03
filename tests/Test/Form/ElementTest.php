@@ -7,7 +7,7 @@ use AuLait\Form\Text;
 use AuLait\Security;
 use AuLait\Validator\Required;
 
-class ElementTest extends \PHPUnit_Framework_TestCase
+class ElementTest extends \PHPUnit\Framework\TestCase
 {
     static public function providerGetValue()
     {

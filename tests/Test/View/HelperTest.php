@@ -6,11 +6,11 @@ use AuLait\Security;
 use AuLait\Router;
 use AuLait\View\Helper;
 
-class HelperTest extends \PHPUnit_Framework_TestCase
+class HelperTest extends \PHPUnit\Framework\TestCase
 {
     protected $di = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

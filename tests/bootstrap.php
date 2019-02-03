@@ -7,7 +7,7 @@ if (version_compare(PHP_VERSION, '5.6', '<')) {
 
 spl_autoload_register(function($class){
     $class = str_replace('\\', '/', $class);
-    $path = '../'. $class . '.php';
+    $path = '../src/'. $class . '.php';
     if (file_exists($path)) {
         require_once($path);
         return;

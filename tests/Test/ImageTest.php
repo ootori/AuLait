@@ -3,9 +3,9 @@ namespace AuLait\Test;
 
 use AuLait\Image;
 
-class ImageTest extends \PHPUnit_Framework_TestCase
+class ImageTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $saveImg = 'tmp/saved.jpg';
         if (file_exists($saveImg)) {
