@@ -6,7 +6,7 @@ use AuLait\Validator\Choices;
 class Select extends Element
 {
     protected $form_type = 'select';
-    protected $options = [
+    protected $params = [
         'options' => [],
         'blank' => false,
         'message' => '選択肢にない項目が入力されました。'
