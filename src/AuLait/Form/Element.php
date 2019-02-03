@@ -20,10 +20,10 @@ class Element
      * @param string $name
      * @param array $params
      */
-    public function __construct($name, $params = [])
+    public function __construct($name, array $params = [])
     {
         $this->name = $name;
-        $this->params = $params;
+        $this->params = array_merge($this->params, $params);
     }
 
     /**
