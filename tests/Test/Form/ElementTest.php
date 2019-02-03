@@ -54,8 +54,7 @@ class ElementTest extends \PHPUnit\Framework\TestCase
     public function testValidator($value, $expected1, $expected2)
     {
         $name = new Text(
-            'test',
-            null
+            'test'
         );
         $name->addValidator(
             new Required()

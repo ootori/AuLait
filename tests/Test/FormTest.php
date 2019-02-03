@@ -38,8 +38,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $di = DI::getDefault();
         $form = new Form($di);
         $text = new Text(
-            $name,
-            null
+            $name
         );
         $text->addValidator(
             new Required()
@@ -59,8 +58,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $form = new Form($di);
 
         $text = new Text(
-            $name,
-            null
+            $name
         );
         $text->addValidator(
             new Required()
@@ -107,8 +105,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $form = new Form($di);
 
         $name = new Text(
-            $name,
-            null
+            $name
         );
         $name->addValidator(
             new Required()
@@ -141,8 +138,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $di = DI::getDefault();
         $form = new Form($di);
         $name = new Text(
-            $name,
-            null
+            $name
         );
         $name->addValidator(
             new Required()
@@ -176,8 +172,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $form = new Form($di);
 
         $name = new Text(
-            $name,
-            null
+            $name
         );
         $name->addValidator(
             new Required()
@@ -201,8 +196,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $di = DI::getDefault();
         $form = new Form($di);
         $text = new Text(
-            $name,
-            null
+            $name
         );
         $form->add($text);
 
