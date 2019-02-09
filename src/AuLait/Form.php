@@ -66,28 +66,20 @@ class Form
     {
         $this->errors = [];
 
-        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
+        /** @var Request $request */
+        $request = $this->di->share('request');
+        $security = $this->di->share('security');
+        if ($request->getMethod() == 'post') {
+
             // TODO: csrfはFormに持たないようにしてForm\CSRFのようなinput要素をつくってそっちで対応する
-            if (!isset($_POST['csrf']) || !$this->di->share('security')->checkCsrfToken($_POST['csrf'])) {
+            $csrf = $this->getValue('csrf');
+            if (!$csrf || !$security->checkCsrfToken($csrf)) {
                 $this->addError('csrf', '無効なフォームからの送信です。');
                 return false;
             }
         }
 
-//        if ($this->method == 'post') {
-//            $inputs = $this->request->getRequests();
-//        } else {
-//            $inputs = $this->request->getQueries();
-//        }
-
         foreach ($this->elements as $element) {
-//
-//            if ($element instanceof File) {
-//                $value = $this->request->getFile($element->name);
-//            } else {
-//                $value = $inputs[$element->name];
-//            }
-
             if (!$element->validate()) {
                 $this->errors[$element->name] = $element->getErrors();
             }
