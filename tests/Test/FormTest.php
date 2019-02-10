@@ -5,6 +5,7 @@ use AuLait\DependencyInjection;
 use AuLait\DI;
 use AuLait\Form;
 use AuLait\Form\Text;
+use AuLait\Request;
 use AuLait\Security;
 use AuLait\Session;
 use AuLait\Validator\Required;
@@ -27,6 +28,12 @@ class FormTest extends \PHPUnit\Framework\TestCase
             'session',
             function () use ($di) {
                 return new Session();
+            }
+        );
+        $di->set(
+            'request',
+            function () use ($di) {
+                return new Request($di);
             }
         );
         DI::setDefault($di);
@@ -129,7 +136,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $name = 'name';
         $value = 'abc';
         $expected = true;
-        $csrfToken = DI::getDefault()->get('security')->getCsrfToken('');
+        $csrfToken = DI::getDefault()->share('security')->getCsrfToken('');
         $expectMessages = [];
 
         $_SERVER['REQUEST_METHOD'] = "POST";
@@ -145,6 +152,15 @@ class FormTest extends \PHPUnit\Framework\TestCase
         );
         $name->setValue($value);
         $form->add($name);
+
+        $csrf = new Form\Hidden(
+            'csrf'
+        );
+        $csrf->addValidator(
+            new Required()
+        );
+        $csrf->setValue($csrfToken);
+        $form->add($csrf);
 
         $result = $form->validate();
         $this->assertEquals($expected, $result);
