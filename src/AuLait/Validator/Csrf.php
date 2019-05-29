@@ -5,7 +5,7 @@ class Csrf extends Base
 {
     protected $options = [
         'value' => null,
-        'message' => '文字列が等しくありません。'
+        'message' => '無効なフォームからの送信です。'
     ];
 
     /**
