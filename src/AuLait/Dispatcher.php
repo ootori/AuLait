@@ -1,4 +1,5 @@
 <?php
+
 namespace AuLait;
 
 use AuLait\Exception\DispatcherException;
@@ -59,6 +60,9 @@ class Dispatcher
 
         $controller->initialize();
 
+        if (!method_exists($controller, $actionName)) {
+            throw new DispatcherException("Method not found ${className}->${actionName}", DispatcherException::CODE_METHOD_NOT_FOUND);
+        }
         $reflectionMethod = new \ReflectionMethod($controller, $actionName);
         foreach ($reflectionMethod->getParameters() as $parameter) {
             if (isset($args[$parameter->getName()])) {
