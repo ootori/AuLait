@@ -1,4 +1,5 @@
 <?php
+
 namespace AuLait;
 
 use AuLait\Exception\RouterException;
@@ -8,12 +9,9 @@ class Router
     protected $patterns = [];
 
     protected $controller = '';
-//    protected $action = '';
     protected $params = [];
 
     protected $default_route = true;
-//    protected $default_scheme = 'https';
-//    protected $default_server_name = '127.0.0.1';
 
     /**
      * @param string $name
@@ -27,22 +25,6 @@ class Router
             'options' => $options
         ];
     }
-
-//    /**
-//     * @param string $default_scheme
-//     */
-//    public function setDefaultScheme($default_scheme)
-//    {
-//        $this->default_scheme = $default_scheme;
-//    }
-
-//    /**
-//     * @param string $server_name
-//     */
-//    public function setDefaultServerName($server_name)
-//    {
-//        $this->default_server_name = $server_name;
-//    }
 
     /**
      * @param string $path
@@ -129,38 +111,46 @@ class Router
     {
         if (isset($this->patterns[$name])) {
             $pattern = $this->patterns[$name];
-        } else if ($this->default_route) {
-            // 一致してない場合にデフォルトルートを利用
-            // ex: $name = user_login => /user/login
-            $path = '/'. str_replace('_', '/', $name);
-            $pattern = [
-                'pattern' => $path,
-                'option' => []
-            ];
         } else {
-            throw new RouterException("undefined routing '$name' ");
+            if ($this->default_route) {
+                // 一致してない場合にデフォルトルートを利用
+                // ex: $name = user_login => /user/login
+                $path = '/' . str_replace('_', '/', $name);
+                $pattern = [
+                    'pattern' => $path,
+                    'option' => []
+                ];
+            } else {
+                throw new RouterException("undefined routing '$name' ");
+            }
         }
 
         $re = preg_replace_callback(
             '#({(\w+)})#',
-            function ($matches) use(&$parameters) {
+            function ($matches) use (&$parameters) {
                 $value = '';
                 if (isset($parameters[$matches[2]])) {
                     $value = $parameters[$matches[2]];
                     unset($parameters[$matches[2]]);
                 }
-                return  $value;
+                return $value;
             },
             $pattern['pattern']
         );
 
+        // null値の削除。URL生成に使用しない。
+        foreach ($parameters as $key => $value) {
+            if (is_null($value)) {
+                unset($parameters[$key]);
+            }
+        }
+
         if ($parameters) {
-            $query = '?'.http_build_query($parameters);
+            $query = '?' . http_build_query($parameters);
         } else {
             $query = '';
         }
 
-//        return $this->default_scheme. '://'. $this->default_server_name. $re. $query;
-        return $re. $query;
+        return $re . $query;
     }
 }
