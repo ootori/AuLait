@@ -12,6 +12,9 @@ class Form
     /** @var string post|get */
     protected $method = 'post';
 
+    /** @var bool CSRFチェックの強制チェック */
+    protected $enforce_csrf_check = true;
+
     /** @var Request  */
     protected $request = null;
 
@@ -42,6 +45,14 @@ class Form
         }
     }
 
+    /**
+     * @param bool $value
+     */
+    public function setEnforceCsrfCheck(bool $value)
+    {
+        $this->enforce_csrf_check = $value;
+    }
+
     public function setRequest(Request $request)
     {
         $this->request = $request;
@@ -69,9 +80,7 @@ class Form
         /** @var Request $request */
         $request = $this->di->share('request');
         $security = $this->di->share('security');
-        if ($request->getMethod() == 'post') {
-
-            // TODO: csrfはFormに持たないようにしてForm\CSRFのようなinput要素をつくってそっちで対応する
+        if ($this->enforce_csrf_check && $request->getMethod() == 'post') {
             $csrf = $this->getValue('csrf');
             if (!$csrf || !$security->checkCsrfToken($csrf)) {
                 $this->addError('csrf', '無効なフォームからの送信です。');
@@ -88,6 +97,7 @@ class Form
         if ($this->errors) {
             return false;
         }
+
         return true;
     }
 
