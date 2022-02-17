@@ -133,7 +133,7 @@ class Router
                     $value = $parameters[$matches[2]];
                     unset($parameters[$matches[2]]);
                 }
-                return $value;
+                return urlencode($value);
             },
             $pattern['pattern']
         );
