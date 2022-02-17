@@ -14,7 +14,7 @@ class Loader
 
     public function register()
     {
-        spl_autoload_register([$this, 'load'], true, true);
+        spl_autoload_register([$this, 'load']);
     }
 
     public function load($class)
