@@ -71,6 +71,40 @@ class RouterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected2, $router->getParams());
     }
 
+    /**
+     *
+     */
+    public function testHandle2()
+    {
+        $route = [
+            [
+                'tags',
+                '/{lang}/tags',
+                [
+                    'controller' => 'Controllers\Tags'
+                ]
+            ],
+            [
+                'admin_tags',
+                '/admin/tags',
+                [
+                    'controller' => 'Controllers\Tags'
+                ]
+            ]
+        ];
+
+        $router = new Router();
+        $router->add(
+            $name,
+            $path,
+            $option
+        );
+
+        $router->handle($target);
+        $this->assertEquals($expected1, $router->getControllerName());
+        $this->assertEquals($expected2, $router->getParams());
+    }
+
     public function testGetAction()
     {
         // TODO:あまりよろしくない。
