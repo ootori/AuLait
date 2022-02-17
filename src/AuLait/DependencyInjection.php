@@ -58,4 +58,13 @@ class DependencyInjection
         return $this->container[$key];
     }
 
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function reset($key)
+    {
+        $this->container[$key] = null;
+    }
+
 }
