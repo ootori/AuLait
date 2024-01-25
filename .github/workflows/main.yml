@@ -1,0 +1,29 @@
+name: AuLait Unit Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-versions: ['7.1', '8.0', '8.1']
+
+    name: PHP ${{ matrix.php-versions }} Test
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: phpunit
+
+      - name: Before Script
+        run: cd tests
+
+      - name: Test with PHPUnit
+        run: phpunit
