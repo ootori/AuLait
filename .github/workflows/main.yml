@@ -26,4 +26,4 @@ jobs:
         run: cd tests
 
       - name: Test with PHPUnit
-        run: phpunit
+        run: phpunit ./
