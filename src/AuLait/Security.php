@@ -5,6 +5,7 @@ class Security
 {
     /** @var DependencyInjection */
     public $di = null;
+    public $sanitize_options = ENT_QUOTES | ENT_HTML5;
 
     public function __construct($di)
     {
@@ -16,7 +17,7 @@ class Security
      */
     public function sanitize($string)
     {
-        return htmlspecialchars($string, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        return htmlspecialchars($string ?? "", $this->sanitize_options, 'UTF-8');
     }
 
     public function getCsrfToken($regenerate = false)
